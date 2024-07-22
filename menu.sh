@@ -51,7 +51,8 @@ echo -e "$YB 13$y.  Status information $wh"
 echo -e "$YB 14$y.  Version information $wh"
 echo -e "$YB 15$y.  Help information $wh"
 echo -e "$YB 16$y.  Chinese special features menu $wh"
-echo -e "$YB 17$y.  Reboot $wh"
+echo -e "$YB 17$y.  Fix High Ping $wh"
+echo -e "$YB 18$y.  Reboot $wh"
 echo -e "${BB}————————————————————————————————————————————————————————${NC}"
 echo -e "${YB}"
 read -p "Select From Options [ 1 - 17 ] : " menu
@@ -121,6 +122,17 @@ clear
 bash warp2 menu 
 ;;
 17)
+clear
+rm -rf /etc/resolv.conf
+cat > /etc/resolv.conf <<-RSV
+nameserver 1.1.1.1
+nameserver 8.8.8.8
+nameserver 2606:4700:4700::1111
+nameserver 2001:4860:4860::8888
+RSV
+chattr +i /etc/resolv.conf
+;;
+18)
 clear
 reboot
 ;;
